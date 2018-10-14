@@ -4,7 +4,7 @@
   "description": "borrowd-api",
   "main": "index.js",
   "scripts": {
-  	"start": "node server.js",
+    "start": "node server.js",
     "test": "mocha --exit"
   },
   "author": "",
@@ -14,6 +14,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "mongoose": "^5.3.3"
   }
 }
