@@ -44,7 +44,7 @@ app.post('/post', jsonParser, (req, res) => {
 	.then(borrowd => res.status(200).json(borrowd.serialize()))
 });
 
-app.put('/put/:id', (req, res) => {
+app.put('/put/:newId', (req, res) => {
 	if (!(req.params.id && req.body.newId && req.params.id === req.body.newId)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
