@@ -13,17 +13,7 @@ app.use(
     cors({})
 );
 
-app.get('/get', (req, res) => {
-   Borrowd
-   .find() //will need to do findOne({userid})
-   .then(board => {res.json(board)})
-   .catch(err => {
-      console.error(err);
-      res.status(500).json({ error: 'something went terribly wrong' });
-    });
-});
-
-app.post('/post', (req, res) => {
+app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -38,22 +28,7 @@ app.post('/post', (req, res) => {
 	.create({
 	board: req.body.board
 	})
-	.then(board => res.status(200).json(borrowd.serialize()))
-});
-//put/:userId
-app.put('/put', (req, res) => {
-  const updated = {};
-  const updateableFields = ['board'];
-  updateableFields.forEach(field => {
-    if (field in req.body) {
-      updated[field] = req.body[field];
-    }
-  });
- 
- Borrowd
-    .findByIdAndUpdate(req.params.userId, { $set: updated }, { new: true })
-    .then(updatedBook => res.status(204).end())
-    .catch(err => res.status(500).json({ message: 'Something went wrong' }));
+	.then(borrowd => res.status(200).json(borrowd.serialize()))
 });
 
 let server;
