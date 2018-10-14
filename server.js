@@ -4,11 +4,11 @@
  const PORT = process.env.PORT || 3000;
 
 const cors = require('cors');
-const {CLIENT_ORIGIN} = require('./config');
+//const {CLIENT_ORIGIN} = require('./config');
 
 app.use(
     cors({
-        origin: CLIENT_ORIGIN
+
     })
 );
 
