@@ -45,8 +45,7 @@ app.post('/post', jsonParser, (req, res) => {
 });
 
 app.put('/put/:newId', jsonParser, (req, res) => {
-	res.send(req.params.newId)})
-  /*const updated = {};
+  const updated = {};
   const updateableFields = ['board'];
   updateableFields.forEach(field => {
     if (field in req.body) {
@@ -55,10 +54,10 @@ app.put('/put/:newId', jsonParser, (req, res) => {
   });
  
  Borrowd
-    .findByIdAndUpdate(req.params.newId, { board: updated.board }, { new: true })
+    .findOneAndUpdate({query: {newId: req.params.newId}, update:{ board: updated.board },  new: true })
     .then(updatedBoard => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
-});*/
+});
 
 
 let server;
