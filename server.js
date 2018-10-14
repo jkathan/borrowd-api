@@ -45,11 +45,11 @@ app.post('/post', jsonParser, (req, res) => {
 });
 
 app.put('/put/:newId', (req, res) => {
-	if (!(req.params.newId && req.body.newId && req.params.newId === req.body.newId)) {
+	if (!(req.params.id && req.body.newId && req.params.id === req.body.newId)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
-}
+	}
   const updated = {};
   const updateableFields = ['board', 'newId'];
   updateableFields.forEach(field => {
@@ -59,7 +59,7 @@ app.put('/put/:newId', (req, res) => {
   });
  
  Borrowd
-    .findByIdAndUpdate(req.params.newId, { board: updated.board }, { new: true })
+    .findByIdAndUpdate(req.params.id, { board: updated.board }, { new: true })
     .then(updatedBoard => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
