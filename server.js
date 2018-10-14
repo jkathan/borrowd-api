@@ -45,7 +45,7 @@ app.post('/post', jsonParser, (req, res) => {
 });
 
 app.put('/put/:newId', jsonParser, (req, res) => {
-	res.send(req.params.newId)
+	res.send(req.params.newId)})
   /*const updated = {};
   const updateableFields = ['board'];
   updateableFields.forEach(field => {
