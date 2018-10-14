@@ -10,9 +10,9 @@ mongoose.Promise = global.Promise;
 //const { Borrowd } = require('./models');
 
 const jsonParser = bodyParser.json();
-app.use(morgan('common'));
-const app = express();
 
+const app = express();
+app.use(morgan('common'));
 
 app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board'];
