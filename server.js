@@ -54,7 +54,7 @@ app.put('/put/:newId', jsonParser, (req, res) => {
   });
  
  Borrowd
-    .findOneAndUpdate({newId: req.params.newId}, { board: updated.board }, {new: true}, function(err, doc))
+    .findOneAndUpdate({newId: req.params.newId}, { board: updated.board }, {new: true}, function(err, doc){})
     .then(updatedBoard => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
