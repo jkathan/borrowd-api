@@ -9,9 +9,23 @@ app.use(
     cors({})
 );
 
- app.get('/api/*', (req, res) => {
-   res.json({ok: true});
- });
+app.post('/post', (req, res) => {
+  const requiredFields = ['board'];
+  for (let i = 0; i < requiredFields.length; i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing \`${field}\` in request body`;
+      console.error(message);
+      return res.status(400).send(message);
+    }
+  }
+
+   Borrowd
+	.create({
+	board: req.body.board
+	})
+	.then(board => res.status(200).json(borrowd.serialize()))
+});
 
 let server;
 
