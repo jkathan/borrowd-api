@@ -26,7 +26,7 @@ app.get('/get', (req, res) => {
 
 
 app.post('/post', jsonParser, (req, res) => {
-  const requiredFields = ['board'];
+  const requiredFields = ['board', 'newId'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -38,13 +38,30 @@ app.post('/post', jsonParser, (req, res) => {
 
    Borrowd
 	.create({
-	board: req.body.board
+	board: req.body.board,
+	newId: req.body.newId
 	})
 	.then(borrowd => res.status(200).json(borrowd.serialize()))
 });
 
-let server;
+app.put('/put/:id', (req, res) => {
+  const updated = {};
+  const updateableFields = ['board'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  });
+ 
+ Borrowd
+    .findByIdAndUpdate(req.params.id, { $set: updated }, { new: true })
+    .then(updatedBoard => res.status(204).end())
+    .catch(err => res.status(500).json({ message: 'Something went wrong' }));
+});
 
+
+let server;
+00
 function runServer(databaseUrl, port = PORT) {
 
   return new Promise((resolve, reject) => {

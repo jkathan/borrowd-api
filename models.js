@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const borrowdSchema = mongoose.Schema({
-	board: [{type: Array, required: true}]
+	board: {type: Array, required: true},
+	newId: {type: String, required: true}
 });
 
 borrowdSchema.methods.serialize = function() {
 	return {
-		board: this.board
+		board: this.board,
+		newId: this.newId
 	};
 };
 
