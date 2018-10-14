@@ -45,7 +45,7 @@ app.post('/post', jsonParser, (req, res) => {
 });
 
 app.put('/put/:newId', (req, res) => {
-	if (!(req.params.id && req.body.newId && req.params.id === req.body.newId)) {
+	if (!(req.params.newId && req.body.newId && req.params.newId === req.body.newId)) {
     res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
