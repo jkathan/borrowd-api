@@ -59,7 +59,7 @@ app.put('/put/:newId', (req, res) => {
   });
  
  Borrowd
-    .findByIdAndUpdate(req.params.id, { board: updated.board }, { new: true })
+    .update({newId:req.params.id}, { board: updated.board }, { new: true })
     .then(updatedBoard => res.status(204).end())
     .catch(err => res.status(500).json({ message: 'Something went wrong' }));
 });
