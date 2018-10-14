@@ -6,6 +6,7 @@ const {DATABASE_URL, PORT} = require('./config');
 const { Borrowd } = require('./models');
 const passport = require('passport');
 const bodyParser = require('body-parser');
+mongoose.Promise = global.Promise;
 //const { Borrowd } = require('./models');
 const app = express();
 const jsonParser = bodyParser.json();
