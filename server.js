@@ -1,15 +1,19 @@
 const express = require('express');
+const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const {DATABASE_URL, PORT} = require('./config');
+const { Borrowd } = require('./models');
+const passport = require('passport');
+const bodyParser = require('body-parser');
 //const { Borrowd } = require('./models');
 const app = express();
-
+const jsonParser = bodyParser.json();
 app.use(
     cors({})
 );
 
-app.post('/post', (req, res) => {
+app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board'];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -24,7 +28,7 @@ app.post('/post', (req, res) => {
 	.create({
 	board: req.body.board
 	})
-	.then(board => res.status(200).json(borrowd.serialize()))
+	.then(board => res.status(200).json(board.serialize()))
 });
 
 let server;
