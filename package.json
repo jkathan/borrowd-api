@@ -1,0 +1,19 @@
+{
+  "name": "borrowd-api",
+  "version": "1.0.0",
+  "description": "borrowd-api",
+  "main": "index.js",
+  "scripts": {
+  	"start": "node server.js",
+    "test": "mocha --exit"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "express": "^4.16.4",
+    "mongoose": "^5.3.3"
+  }
+}
