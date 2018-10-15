@@ -36,12 +36,20 @@ app.use('/api/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
-
-
 app.get('/get', (req, res) => {
    Borrowd
    .find() //will need to do findOne({userid})
    .then(board => {res.json(board)})
+   .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
+app.get('/api/user', (req, res) => {
+   User
+   .find() //will need to do findOne({userid})
+   .then(user => {res.json(user)})
    .catch(err => {
       console.error(err);
       res.status(500).json({ error: 'something went terribly wrong' });
