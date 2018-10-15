@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
 const borrowdSchema = mongoose.Schema({
-	board: [{type: String, required: true}],
+	board: {type: Array, required: true},
 	newId: {type: String, required: true}
 });
 
