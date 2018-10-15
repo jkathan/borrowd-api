@@ -89,7 +89,7 @@ describe('Borrowd API resource', function () {
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
           resBoard = res.body[0];
-          return Borrowd.findById(resBoard.id);
+          return Borrowd.findOne(resBoard.newId);
         })
         .then(board => {
           resBoard.board.should.equal(board.board);
@@ -144,15 +144,15 @@ describe('PUT endpoint', function () {
       return Borrowd
         .findOne()
         .then(post => {
-          updateData.id = post.id;
+          updateData.newId = post.newId;
 
           return chai.request(app)
-            .put(`/put/${post.id}`)
+            .put(`/put/${post.newId}`)
             .send(updateData);
         })
         .then(res => {
           res.should.have.status(204);
-          return Borrowd.findById(updateData.id);
+          return Borrowd.findOne(updateData.newId);
         })
         .then(board => {
           board.board.should.equal(updateData.board);
