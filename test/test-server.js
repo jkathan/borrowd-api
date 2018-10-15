@@ -131,7 +131,7 @@ describe('Borrowd API resource', function () {
 describe('PUT endpoint', function () {
 
     // strategy:
-    //  1. Get an existing post from db
+    //  1. Get an existing post from dbgit 
     //  2. Make a PUT request to update that post
     //  4. Prove post in db is correctly updated
     it('should update fields you send over', function () {
