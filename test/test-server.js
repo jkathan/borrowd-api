@@ -1,19 +1,161 @@
- const chai = require('chai');
- const chaiHttp = require('chai-http');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const faker = require('faker');
+const mongoose = require('mongoose');
 
- const {app} = require('../server');
+// this makes the should syntax available throughout
+// this module
+const should = chai.should();
 
- const should = chai.should();
- chai.use(chaiHttp);
+const { Borrowd } = require('../models');
+const { app, runServer, closeServer } = require('../server');
+const { TEST_DATABASE_URL } = require('../config');
 
- describe('API', function() {
+chai.use(chaiHttp);
 
-   it('should 200 on GET requests', function() {
-     return chai.request(app)
-       .get('/api/fooooo')
-       .then(function(res) {
-         res.should.have.status(200);
-         res.should.be.json;
-       });
-   });
- });
+function seedBorrowdData() {
+  console.info('seeding borrowd data');
+  const seedData = [];
+  for (let i = 1; i <= 10; i++) {
+    seedData.push({
+      board: faker.lorem.sentence(),
+      newId: faker.random.number(), 
+    });
+  }
+
+  return Borrowd.insertMany(seedData);
+}
+
+function tearDownDb() {
+  return new Promise((resolve, reject) => {
+    console.warn('Deleting database');
+    mongoose.connection.dropDatabase()
+      .then(result => resolve(result))
+      .catch(err => reject(err));
+  });
+}
+
+describe('Borrowd API resource', function () {
+
+  before(function () {
+    return runServer(TEST_DATABASE_URL);
+  });
+
+  beforeEach(function () {
+    return seedLibraryBooksData(); //within ()take in 
+  });
+
+  afterEach(function () {
+    return tearDownDb();
+  });
+
+  after(function () {
+    return closeServer();
+  });
+
+  describe('GET endpoint', function () {
+
+    it('should return all existing posts', function () {
+      let res;
+      return chai.request(app)
+        .get('/get')
+        .then(_res => {
+          res = _res;
+          res.should.have.status(200);
+          res.body.should.have.lengthOf.at.least(1);
+
+          return Borrowd.count();
+        })
+        .then(count => {
+         
+          res.body.should.have.lengthOf(count);
+        });
+	});
+
+		it('should return board with right fields', function () {
+      let resBoard;
+      return chai.request(app)
+        .get('/get')
+        .then(function (res) {
+
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('array');
+          res.body.should.have.lengthOf.at.least(1);
+          res.body.forEach(function (post) {
+            post.should.be.a('object');
+            post.should.include.keys('board', 'newId');
+          });
+          // just check one of the posts that its values match with those in db
+          // and we'll assume it's true for rest
+          resBoard = res.body[0];
+          return Borrowd.findById(resBoard.id);
+        })
+        .then(board => {
+          resBoard.board.should.equal(board.board);
+          resBoard.newId.should.equal(board.newId);
+        });
+    });
+});
+
+    describe('POST endpoint', function () {
+    
+    it('should add a new board', function () {
+
+      const newBoard = {
+      board: faker.lorem.sentence(),
+      newId: faker.random.number(), 
+    };
+  
+
+      return chai.request(app)
+        .post('/add')
+        .send(newBoard)
+        .then(function (res) {
+          res.should.have.status(200);
+          res.should.be.json;
+          res.body.should.be.a('object');
+          res.body.should.include.keys(
+            'board', 'newId');
+          res.body.board.should.equal(newBoard.board);
+          res.body.newId.should.equal(newBoard.newId);
+          return Borrowd.findOne(res.body.newId);
+        })
+        .then(function (board) {
+          board.board.should.equal(newBoard.board);
+          board.newId.should.equal(newBoard.newId);
+        });
+    });
+});
+
+describe('PUT endpoint', function () {
+
+    // strategy:
+    //  1. Get an existing post from db
+    //  2. Make a PUT request to update that post
+    //  4. Prove post in db is correctly updated
+    it('should update fields you send over', function () {
+      const updateData = {
+        board:'This is a test',
+      	newId: '12345',
+
+      };
+
+      return Borrowd
+        .findOne()
+        .then(post => {
+          updateData.id = post.id;
+
+          return chai.request(app)
+            .put(`/put/${post.id}`)
+            .send(updateData);
+        })
+        .then(res => {
+          res.should.have.status(204);
+          return Borrowd.findById(updateData.id);
+        })
+        .then(board => {
+          board.board.should.equal(updateData.board);
+          board.newid.should.equal(updateData.newId);
+        });
+    });
