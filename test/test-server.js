@@ -159,3 +159,4 @@ describe('PUT endpoint', function () {
           board.newid.should.equal(updateData.newId);
         });
     });
+});
