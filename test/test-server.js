@@ -103,7 +103,7 @@ describe('Borrowd API resource', function () {
     it('should add a new board', function () {
 
       const newBoard = {
-      board: [{faker.lorem.sentence()}],
+      board: [faker.lorem.sentence()],
       newId: faker.random.number(), 
     };
   
@@ -136,9 +136,7 @@ describe('PUT endpoint', function () {
     //  4. Prove post in db is correctly updated
     it('should update fields you send over', function () {
       const updateData = {
-        board:'This is a test',
-      	newId: '12345',
-
+        board:['This is a test'],
       };
 
       return Borrowd
