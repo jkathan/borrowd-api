@@ -42,7 +42,7 @@ describe('Borrowd API resource', function () {
   });
 
   beforeEach(function () {
-    return seedLibraryBooksData(); //within ()take in 
+    return seedBorrowdData(); //within ()take in 
   });
 
   afterEach(function () {
