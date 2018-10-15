@@ -91,9 +91,9 @@ describe('Borrowd API resource', function () {
           resBoard = res.body[0];
           return Borrowd.findById(resBoard.id);
         })
-        .then(board => {
-          resBoard.board.should.equal(board.board);
-          resBoard.newId.should.equal(board.newId);
+        .then(boardItems => {
+          resBoard.board.should.equal(boardItems.board);
+          resBoard.newId.should.equal(boardItems.newId);
         });
     });
 });
@@ -118,12 +118,12 @@ describe('Borrowd API resource', function () {
           res.body.should.include.keys(
             'board', 'newId');
           res.body.board.should.equal(newBoard.board);
-          res.body.newId.should.equal(newBoard.newId);
+          res.body.newId.should.equal(newBoard.newId.toString());
           return Borrowd.findOne(res.body.newId);
         })
         .then(function (board) {
           board.board.should.equal(newBoard.board);
-          board.newId.should.equal(newBoard.newId);
+          board.newId.should.equal(newBoard.newId.toString());
         });
     });
 });
@@ -154,9 +154,9 @@ describe('PUT endpoint', function () {
           res.should.have.status(204);
           return Borrowd.findById(updateData.id);
         })
-        .then(board => {
-          board.board.should.equal(updateData.board);
-          board.newid.should.equal(updateData.newId);
+        .then(boardItems => {
+          boardItems.board.should.equal(updateData.board);
+          boardItems.newid.should.equal(updateData.newId);
         });
     });
 });
