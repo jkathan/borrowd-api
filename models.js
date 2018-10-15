@@ -8,6 +8,7 @@ const borrowdSchema = mongoose.Schema({
 
 borrowdSchema.methods.serialize = function() {
 	return {
+		id: this._id,
 		board: this.board,
 		newId: this.newId
 	};
