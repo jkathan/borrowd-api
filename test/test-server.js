@@ -22,7 +22,6 @@ function seedBorrowdData() {
       newId: faker.random.number(), 
     });
   }
-  console.log(seedData)
   return Borrowd.insertMany(seedData);
 }
 
