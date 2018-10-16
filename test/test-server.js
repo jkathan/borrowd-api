@@ -92,8 +92,8 @@ describe('Borrowd API resource', function () {
           return Borrowd.findById(resBoard.id);
         })
         .then(boardItems => {
-          resBoard.board.should.equal(boardItems.board);
-          resBoard.newId.should.equal(boardItems.newId);
+          resBoard._id.should.equal(boardItems._id);
+          resBoard.__v.should.equal(boardItems.__v);
         });
     });
 });
