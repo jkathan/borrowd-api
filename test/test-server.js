@@ -18,7 +18,7 @@ function seedBorrowdData() {
   const seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
-      board: [faker.lorem.sentence()],
+      board: {faker.lorem.sentence()},
       newId: faker.random.number(), 
     });
   }
