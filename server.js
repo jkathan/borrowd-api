@@ -45,7 +45,7 @@ app.get('/get', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-
+/*
 app.get('/get/:newId', (req, res) => {
    Borrowd
    .findOne({newId: req.params.newId}) //will need to do findOne({userid})
@@ -55,7 +55,7 @@ app.get('/get/:newId', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-
+*/
 app.get('/api/user', (req, res) => {
    User
    .find() //will need to do findOne({userid})
