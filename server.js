@@ -36,6 +36,16 @@ app.use('/api/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
 
+app.get('/get', (req, res) => {
+   Borrowd
+   .findOne({newId: req.params.newId}) //will need to do findOne({userid})
+   .then(board => {res.json(board)})
+   .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'something went terribly wrong' });
+    });
+});
+
 app.get('/get/:newId', (req, res) => {
    Borrowd
    .findOne({newId: req.params.newId}) //will need to do findOne({userid})
