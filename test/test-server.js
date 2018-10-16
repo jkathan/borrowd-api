@@ -92,7 +92,7 @@ describe('Borrowd API resource', function () {
           return Borrowd.findById(resBoard.id);
         })
         .then(boardItems => {
-          resBoard.board.should.deepEqual(boardItems.board);
+          resBoard.board.should.eql(boardItems.board);
           resBoard.newId.should.equal(boardItems.newId);
         });
     });
