@@ -18,7 +18,7 @@ function seedBorrowdData() {
   const seedData = [];
   for (let i = 1; i <= 10; i++) {
     seedData.push({
-      board: [faker.lorem.sentence()],
+      {board: [faker.lorem.sentence()],
       newId: faker.random.number(), 
     });
   }
@@ -83,7 +83,8 @@ describe('Borrowd API resource', function () {
 
           res.body.should.have.lengthOf.at.least(1);
           res.body.forEach(function (post) {
-            post.should.include.keys('id', 'board', 'newId');
+            post.should.be.a('object');
+            post.should.include.keys('_id', '__v');
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
@@ -91,6 +92,7 @@ describe('Borrowd API resource', function () {
           return Borrowd.findById(resBoard.id);
         })
         .then(boardItems => {
+          resBoard.board.should.equal(boardItems.board);
           resBoard.newId.should.equal(boardItems.newId);
         });
     });
@@ -101,7 +103,7 @@ describe('Borrowd API resource', function () {
     it('should add a new board', function () {
 
       const newBoard = {
-      board: [faker.lorem.sentence()],
+      board: [{faker.lorem.sentence()}],
       newId: faker.random.number(), 
     };
   
