@@ -106,9 +106,9 @@ describe('Borrowd API resource', function () {
 
       const newBoard = {
       board: faker.lorem.sentence(),
-      newId: faker.random.number(), 
+      newId: faker.random.number() 
     };
-  
+    console.log(newBoard);
 
       return chai.request(app)
         .post('/add')
