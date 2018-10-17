@@ -91,6 +91,7 @@ describe('Borrowd API resource', function () {
           resBoard = res.body[0];
           console.log(resBoard);
           return Borrowd.findById(resBoard.id);
+          console.log(resBoard.id);
         })
         .then(boardItems => {
           console.log(boardItems);
