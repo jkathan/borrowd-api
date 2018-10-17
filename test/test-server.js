@@ -93,6 +93,7 @@ describe('Borrowd API resource', function () {
           return Borrowd.findById(resBoard.id);
         })
         .then(boardItems => {
+          console.log(boardItems);
           resBoard.board[0].should.eql(boardItems.board[0]);
           resBoard.newId.should.equal(boardItems.newId);
         });
