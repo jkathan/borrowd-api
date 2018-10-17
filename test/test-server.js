@@ -122,7 +122,7 @@ describe('Borrowd API resource', function () {
             'board', 'newId');
           res.body.board[0].should.equal(newBoard.board[0]);
           res.body.newId.should.equal(newBoard.newId.toString());
-          return Borrowd.findOne(res.body.newId);
+          return Borrowd.findById(res.body.id;
         })
         .then(function (board) {
           board[0].board.should.eql(newBoard.board);
