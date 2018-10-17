@@ -84,8 +84,9 @@ describe('Borrowd API resource', function () {
           res.body.should.have.lengthOf.at.least(1);
           res.body.forEach(function (post) {
             console.log(post.board);
+            console.log(post.newId);
             post.board.should.be.a('array');
-            post.newId.should.include.keys('newId');
+
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
