@@ -127,7 +127,7 @@ describe('Borrowd API resource', function () {
         .then(function (board) {
           console.log(board);
           console.log(newBoard);
-          board.board.should.equal(newBoard.board);
+          board[0].board.should.equal(newBoard.board);
           board.newId.should.equal(newBoard.newId.toString());
         });
     });
