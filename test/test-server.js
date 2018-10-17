@@ -125,8 +125,6 @@ describe('Borrowd API resource', function () {
           return Borrowd.findOne(res.body.newId);
         })
         .then(function (board) {
-          console.log(board);
-          console.log(newBoard);
           board[0].board.should.equal(newBoard.board);
           board.newId.should.equal(newBoard.newId.toString());
         });
@@ -143,7 +141,7 @@ describe('PUT endpoint', function () {
       const updateData = {
         board:['This is a test'],
       };
-
+      console.log(updateData.id);
       return Borrowd
         .findOne()
         .then(post => {
