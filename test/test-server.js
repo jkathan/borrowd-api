@@ -89,10 +89,11 @@ describe('Borrowd API resource', function () {
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
           resBoard = res.body[0];
+          console.log(resBoard);
           return Borrowd.findById(resBoard.id);
         })
         .then(boardItems => {
-          resBoard.board.should.eql(boardItems.board);
+          resBoard.board[0].should.eql(boardItems.board[0]);
           resBoard.newId.should.equal(boardItems.newId);
         });
     });
