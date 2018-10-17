@@ -125,7 +125,7 @@ describe('Borrowd API resource', function () {
           return Borrowd.findOne(res.body.newId);
         })
         .then(function (board) {
-          board[0].board.should.equal(newBoard.board);
+          board[0].board.should.eql(newBoard.board);
           board.newId.should.equal(newBoard.newId.toString());
         });
     });
@@ -142,18 +142,17 @@ describe('PUT endpoint', function () {
         board:['This is a test'],
       };
       console.log(updateData);
-      return Borrowd
-        .findOne()
-        .then(post => {
-          console.log(post);
-          updateData.id = post.id;
+      return chai.request(app)
+          .get('/get')
+          .then(function(res) {
+          updateData.id = res.body[0].id;
 
           return chai.request(app)
-            .put(`/put/${post.id}`)
+            .put(`/put/${updateData.id}`)
             .send(updateData);
         })
         .then(res => {
-          res.should.have.status(204);
+          res.should.have.status(200);
           return Borrowd.findById(updateData.id);
         })
         .then(boardItems => {
