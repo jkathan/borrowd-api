@@ -92,7 +92,7 @@ describe('Borrowd API resource', function () {
           console.log(resBoard);
           //console.log(resBoard.id);
           console.log(resBoard.newId);
-          return Borrowd.findOne(newId: resBoard.newId);
+          return Borrowd.findOne(resBoard.newId);
           
         })
         .then(boardItems => {
