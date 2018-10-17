@@ -86,7 +86,7 @@ describe('Borrowd API resource', function () {
             console.log(post.board);
             console.log(post.newId);
             post.board.should.be.a('array');
-
+            post.should.include.keys('board', 'newId',)
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
