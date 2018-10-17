@@ -111,7 +111,7 @@ describe('Borrowd API resource', function () {
     console.log(newBoard);
 
       return chai.request(app)
-        .post('/add')
+        .post('/post')
         .send(newBoard)
         .then(function (res) {
           console.log(res.body);
