@@ -114,6 +114,7 @@ describe('Borrowd API resource', function () {
         .post('/add')
         .send(newBoard)
         .then(function (res) {
+          console.log(res);
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
