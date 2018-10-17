@@ -105,7 +105,7 @@ describe('Borrowd API resource', function () {
     it('should add a new board', function () {
 
       const newBoard = {
-      board: [faker.lorem.sentence()],
+      board: faker.lorem.sentence(),
       newId: faker.random.number(), 
     };
   
@@ -114,7 +114,7 @@ describe('Borrowd API resource', function () {
         .post('/add')
         .send(newBoard)
         .then(function (res) {
-          console.log(res);
+          console.log(res.body);
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
