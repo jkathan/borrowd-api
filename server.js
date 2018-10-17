@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const {DATABASE_URL, PORT} = require('./config');
 const { Borrowd } = require('./models');
+const { User } = require('./users/models');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 mongoose.Promise = global.Promise;
