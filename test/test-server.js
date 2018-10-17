@@ -152,7 +152,7 @@ describe('PUT endpoint', function () {
             .send(updateData);
         })
         .then(res => {
-          res.should.have.status(200);
+          res.should.have.status(204);
           return Borrowd.findById(updateData.id);
         })
         .then(boardItems => {
