@@ -56,7 +56,7 @@ app.get('/get/:newId', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-
+/*
 app.get('/api/user', (req, res) => {
    User
    .find() //will need to do findOne({userid})
@@ -66,7 +66,7 @@ app.get('/api/user', (req, res) => {
       res.status(500).json({ error: 'something went terribly wrong' });
     });
 });
-
+*/
 
 app.post('/post', jsonParser, (req, res) => {
   const requiredFields = ['board', 'newId'];
