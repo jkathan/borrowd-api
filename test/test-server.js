@@ -108,13 +108,13 @@ describe('Borrowd API resource', function () {
       board: [ faker.lorem.sentence()],
       newId: faker.random.number() 
     };
-    console.log(newBoard);
+    //console.log(newBoard);
 
       return chai.request(app)
         .post('/post')
         .send(newBoard)
         .then(function (res) {
-          console.log(res.body);
+          //console.log(res.body);
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
@@ -125,6 +125,8 @@ describe('Borrowd API resource', function () {
           return Borrowd.findOne(res.body.newId);
         })
         .then(function (board) {
+          console.log(board);
+          console.log(newBoard);
           board.board.should.equal(newBoard.board);
           board.newId.should.equal(newBoard.newId.toString());
         });
