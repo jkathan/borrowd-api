@@ -155,10 +155,6 @@ describe('PUT endpoint', function () {
           res.should.have.status(204);
           return Borrowd.findById(updateData.id);
         })
-        .then(boardItems => {
-          boardItems.board.should.equal(updateData.board);
-          boardItems.newid.should.equal(updateData.newId);
-        });
     });
 });
   });
