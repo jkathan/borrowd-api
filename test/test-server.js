@@ -105,7 +105,7 @@ describe('Borrowd API resource', function () {
     it('should add a new board', function () {
 
       const newBoard = {
-      board: [items: faker.lorem.sentence()],
+      board: [ faker.lorem.sentence()],
       newId: faker.random.number() 
     };
     console.log(newBoard);
