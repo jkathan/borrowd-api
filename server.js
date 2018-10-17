@@ -28,6 +28,7 @@ app.use(function (req, res, next) {
   }
   next();
 });
+app.use("/");
 
 passport.use(localStrategy);
 passport.use(jwtStrategy);
@@ -36,6 +37,8 @@ app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 
 const jwtAuth = passport.authenticate('jwt', { session: false });
+
+
 
 app.get('/get', (req, res) => {
    Borrowd
