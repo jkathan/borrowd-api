@@ -83,17 +83,12 @@ describe('Borrowd API resource', function () {
 
           res.body.should.have.lengthOf.at.least(1);
           res.body.forEach(function (post) {
-            console.log(post.board);
-            console.log(post.newId);
             post.board.should.be.a('array');
             post.should.include.keys('board', 'newId');
           });
           // just check one of the posts that its values match with those in db
           // and we'll assume it's true for rest
           resBoard = res.body[0];
-          console.log(resBoard);
-          //console.log(resBoard.id);
-          console.log(resBoard.newId);
           return Borrowd.find(resBoard);
           
         })
@@ -108,13 +103,11 @@ describe('Borrowd API resource', function () {
       board: [ faker.lorem.sentence()],
       newId: faker.random.number() 
     };
-    //console.log(newBoard);
 
       return chai.request(app)
         .post('/post')
         .send(newBoard)
         .then(function (res) {
-          //console.log(res.body);
           res.should.have.status(200);
           res.should.be.json;
           res.body.should.be.a('object');
@@ -129,16 +122,10 @@ describe('Borrowd API resource', function () {
 });
 
 describe('PUT endpoint', function () {
-
-    // strategy:
-    //  1. Get an existing post from dbgit
-    //  2. Make a PUT request to update that post
-    //  4. Prove post in db is correctly updated
     it('should update fields you send over', function () {
       const updateData = {
         board:['This is a test'],
       };
-      console.log(updateData);
       return chai.request(app)
           .get('/get')
           .then(function(res) {
