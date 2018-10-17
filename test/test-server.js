@@ -90,11 +90,13 @@ describe('Borrowd API resource', function () {
           // and we'll assume it's true for rest
           resBoard = res.body[0];
           console.log(resBoard);
-          return Borrowd.findById(resBoard.id);
           console.log(resBoard.id);
+          console.log(resBoard.newId);
+          return Borrowd.findOne(resBoard.newId);
+          
         })
         .then(boardItems => {
-          console.log(boardItems);
+          //console.log(boardItems);
           resBoard.board[0].should.eql(boardItems.board[0]);
           resBoard.newId.should.equal(boardItems.newId);
         });
