@@ -141,10 +141,11 @@ describe('PUT endpoint', function () {
       const updateData = {
         board:['This is a test'],
       };
-      console.log(updateData.id);
+      console.log(updateData);
       return Borrowd
         .findOne()
         .then(post => {
+          console.log(post);
           updateData.id = post.id;
 
           return chai.request(app)
