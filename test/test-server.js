@@ -19,7 +19,7 @@ function seedBorrowdData() {
   for (let i = 1; i <= 10; i++) {
     seedData.push({
       board: faker.lorem.sentence(),
-      newId: faker.random.number(), 
+      newId: faker.random.number().toString(), 
     });
   }
   return Borrowd.insertMany(seedData);
@@ -90,7 +90,7 @@ describe('Borrowd API resource', function () {
           // and we'll assume it's true for rest
           resBoard = res.body[0];
           console.log(resBoard);
-          console.log(resBoard.id);
+          //console.log(resBoard.id);
           console.log(resBoard.newId);
           return Borrowd.findOne(resBoard.newId);
           
